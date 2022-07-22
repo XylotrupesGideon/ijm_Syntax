@@ -41,7 +41,7 @@
 		"variables":{
 			"patterns":[
 				{
-					"name":"variable.parameter.ijm_macro_language",
+					"name":"storage.type.variable.ijm_macro_language",
 					"match":"\\b(\\w+)\\b"
 				}
 			]
