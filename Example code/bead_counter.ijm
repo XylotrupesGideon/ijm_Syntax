@@ -10,10 +10,10 @@ print("DONE :)");
 function processFolder(input) {
 	list = getFileList(input);
 	list = Array.sort(list);
-	output = input+File.separator+"Output";
+	output = input + File.separator + "Output";
 	File.makeDirectory(output)
 	if (File.exists(output + File.separator + "output.txt")){
-		File.delete(output + File.separator + "output.txt");
+		File.delete(output + File.separator + 'output.txt');
 	}
 	file=File.open(output + File.separator + "output.txt");
 	print(file, "FileMane\tTotalArea\tGFPArea\t%GFPArea\tMeanSignal\ttotalBeads\tinternal\t%internal\texternal\t%external\tpartial\t%partial\n");
@@ -23,7 +23,7 @@ function processFolder(input) {
 			if(File.isDirectory(input + File.separator + list[i]))
 				processFolder(input + File.separator + list[i]);
 			if(endsWith(list[i], suffix))
-				thresholds=thresholding(list[i+1]);		
+				thresholds = thresholding(list[i+1]);		
 				print(list[i],list[i+1]);
 				if (i+1 > list.length || startsWith(list[i+1], "Output") || startsWith(list[i], "Output")){}
 				else{
@@ -95,12 +95,12 @@ function count_beads(bead_file,BeadROIs_path,file){
 	X = newArray(nResults); //new array for x coords
 	Y = newArray(nResults); //new array for y coords
 	totalBeads = nResults; // number of beads in total
-	for(i=0;i<nResults;i++){ //iterate over point coordinates
+	for (i=0;i<nResults;i++){ //iterate over point coordinates
 		X[i]=getResult("XM",i); //fill array
 		Y[i]=getResult("YM",i); //fill array
 		toUnscaled(X[i]); //scaling
 		toUnscaled(Y[i]); //scaling
-		makeOval( X[i]-11,Y[i]-11, 2*11, 2*11); //draws a selection on each maxima
+		makeOval( X[i]-11,Y[i]-11, 2 * 11, 2 * 11); //draws a selection on each maxima
 		roiManager("Add"); // populates ROI manager	
 	}
 	run("Clear Results");//clear point roi measurments

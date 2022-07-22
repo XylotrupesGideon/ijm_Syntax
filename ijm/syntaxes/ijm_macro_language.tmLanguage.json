@@ -2,30 +2,93 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "ImageJ Macro Language",
 	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		}
+		{"include": "#value"}
+
 	],
+
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.ijm_macro_language",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
+
+		"value": {
+			"patterns":[
+			{"include": "#comment"},
+			{"include": "#string"},
+			{"include": "#parameter"},
+			{"include": "#keywords"},
+			{"include": "#number"},
+			{"include": "#support"},
+			{"include": "#variables"}
+		]
 		},
-		"strings": {
-			"name": "string.quoted.double.ijm_macro_language",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
+
+		"parameter":{
+			"patterns":[
 				{
-					"name": "constant.character.escape.ijm_macro_language",
-					"match": "\\\\."
+					"match":"\b([\\w_-]+)\b(?=\\s?=)",
+					"name" : "variable.other.ijm_macro_language"
 				}
 			]
+		},
+
+		"keywords":{
+			"patterns":[
+				{
+					"match":"\\b(for|if|else|function)\\b",
+					"name" : "keyword.parameter.ijm_macro_language"
+				}
+			]
+		},	
+		
+		"variables":{
+			"patterns":[
+				{
+					"name":"variable.parameter.ijm_macro_language",
+					"match":"\\b(\\w+)\\b"
+				}
+			]
+		},
+
+		"support":{
+			"patterns":[
+				{
+					"match": "\\b(?:true|false|null)\\b",
+					"name": "constant.language.ijm_macro_language"
+				},
+				{
+					"match": "\\b(Array|Color|Dialog|File|Fit|getDir|IJ|String|Image|List|Math|Overlay|Plot|Property|Roi|roiManager|setOption|Stack|Table)\\b",
+					"name": "support.class.language.ijm_macro_language"
+				},
+				{
+					"match": "(\\w+)(?=\\()",
+					"name": "support.function..ijm_macro_language"
+				}
+			]
+		},
+
+		"comment":{
+			"patterns": [
+				{
+					"match": "\/\/.*\n",
+					"name": "comment.line.ijm_macro_language"
+				}
+			]
+		},
+
+		"string": {
+			"patterns":[
+				{
+					"match": "\".+?\"",
+					"name": "string.quoted.double.ijm_macro_language"
+				},
+				{
+					"match": "'.+?'",
+					"name": "string.quoted.single.ijm_macro_language"
+				}
+			]
+		},
+
+		"number": {
+			"match": "(?x)        # turn on extended mode\n  -?        # an optional minus\n  (?:\n    0       # a zero\n    |       # ...or...\n    [1-9]   # a 1-9 character\n    \\d*     # followed by zero or more digits\n  )\n  (?:\n    (?:\n      \\.    # a period\n      \\d+   # followed by one or more digits\n    )?\n    (?:\n      [eE]  # an e character\n      [+-]? # followed by an option +/-\n      \\d+   # followed by one or more digits\n    )?      # make exponent optional\n  )?        # make decimal portion optional",
+			"name": "constant.numeric.ijm_macro_language"
 		}
 	},
 	"scopeName": "source.ijm"
