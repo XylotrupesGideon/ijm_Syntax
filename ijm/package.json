@@ -1,0 +1,25 @@
+{
+    "name": "ijm",
+    "displayName": "IJM",
+    "description": "ImageJ/Fiji Macro Language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.69.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "ijm_macro_language",
+            "aliases": ["ImageJ Macro Language", "ijm_macro_language"],
+            "extensions": [".ijm"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ijm_macro_language",
+            "scopeName": "source.ijm",
+            "path": "./syntaxes/ijm_macro_language.tmLanguage.json"
+        }]
+    }
+}
